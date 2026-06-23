@@ -1,6 +1,6 @@
 # Audit report template
 
-The report produced by `/audit` must follow this exact structure.
+The report produced by `/security-audit:audit` must follow this exact structure.
 
 ````markdown
 ## Security audit report

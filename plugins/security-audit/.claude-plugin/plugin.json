@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "security-audit",
   "version": "1.0.0",
-  "description": "Audit de securite white-box pour applications web. Auto-detecte la stack (PHP, Node/Express, Next.js, Django, Flask, Rails, Spring) et applique la checklist adaptee. Lance /audit avant un commit.",
+  "description": "Audit de securite white-box pour applications web. Auto-detecte la stack (PHP, Node/Express, Next.js, Django, Flask, Rails, Spring) et applique la checklist adaptee. Lance /security-audit:audit avant un commit.",
   "author": { "name": "Dshellz" },
   "homepage": "https://github.com/Dshellz/claude-code-security-audit",
   "repository": "https://github.com/Dshellz/claude-code-security-audit",

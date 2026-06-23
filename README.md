@@ -1,7 +1,9 @@
 # claude-code-security-audit
 
+![Demo of the /security-audit:audit command](docs/demo-plugin.gif)
+
 A ready-to-use application-security (AppSec) plugin for **Claude Code**. It adds an
-**`/audit`** slash command that **auto-detects your stack**, applies the matching
+**`/security-audit:audit`** slash command that **auto-detects your stack**, applies the matching
 vulnerability checklist, runs a white-box security review of your pending changes
 (`git diff`), and returns a structured report.
 
@@ -9,24 +11,14 @@ Supported stacks: **PHP**, **Node.js / Express**, **Next.js**, **Django / DRF**,
 **Flask**, **Ruby on Rails**, **Java / Spring Boot**.
 
 Bilingual: the report is produced in **French** (default) or **English** — pass `fr`
-or `en` to `/audit`.
-
-## Install (marketplace)
-
-```
-/plugin marketplace add Dshellz/claude-code-security-audit
-/plugin install security-audit
-/audit
-```
-
-Then start a **new** Claude Code session and check with `/help` that `audit` appears.
+or `en` to `/security-audit:audit`.
 
 ## Usage
 
 ```
-/audit                          # audit pending changes (git diff), auto-detect stack, FR report
-/audit en                       # same, English report
-/audit en src/Controller/Foo.php   # audit a specific file, English report
+/security-audit:audit                          # audit pending changes (git diff), auto-detect stack, FR report
+/security-audit:audit en                       # same, English report
+/security-audit:audit en src/Controller/Foo.php   # audit a specific file, English report
 ```
 
 The report sorts findings by severity (`[CRITICAL]` / `[MAJOR]` / `[MINOR]` / `[INFO]`),
@@ -35,7 +27,7 @@ conclusion (`All clear` or `N vulnerability(ies)`).
 
 ## How stack detection works
 
-`/audit` looks for marker files at the project root: `composer.json` → PHP,
+`/security-audit:audit` looks for marker files at the project root: `composer.json` → PHP,
 `package.json` with `next` → Next.js (else `express` → Node/Express), `manage.py` or a
 `django` dependency → Django, a `flask` dependency → Flask, `Gemfile` → Rails,
 `pom.xml` / `build.gradle` → Spring. If nothing matches, it asks.
@@ -48,7 +40,7 @@ conclusion (`All clear` or `N vulnerability(ies)`).
 plugins/
 └── security-audit/               # the plugin
     ├── .claude-plugin/plugin.json
-    ├── commands/audit.md         # /audit (auto-detection)
+    ├── commands/audit.md         # /security-audit:audit (auto-detection)
     └── rules/
         ├── report-template.fr.md
         ├── report-template.en.md
@@ -58,6 +50,19 @@ plugins/
 
 Feel free to adapt the per-stack `rules/<lang>/<stack>.md` checklists to your business
 logic and framework version.
+
+## Install (marketplace)
+
+```
+/plugin marketplace add Dshellz/claude-code-security-audit
+/plugin install security-audit
+/security-audit:audit
+```
+
+Then start a **new** Claude Code session and check with `/help` that `audit` appears.
+
+> Heads-up: this repo is now **100% plugin**. The old per-stack bundles you used to copy
+> into `.claude/` have been removed; install via the marketplace instead.
 
 ## Limitations
 

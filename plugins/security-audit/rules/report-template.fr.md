@@ -1,6 +1,6 @@
 # Modèle de rapport d'audit
 
-Le rapport produit par `/audit` doit suivre exactement cette structure.
+Le rapport produit par `/security-audit:audit` doit suivre exactement cette structure.
 
 ````markdown
 ## Rapport d'audit de sécurité
