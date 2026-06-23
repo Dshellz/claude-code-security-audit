@@ -1,0 +1,45 @@
+# Audit report template
+
+The report produced by `/audit` must follow this exact structure.
+
+````markdown
+## Security audit report
+
+**Scope:** <branch / files / argument analyzed>
+**Summary:** X critical · Y major · Z minor · W info
+
+---
+
+### [CRITICAL] <Vulnerability name> — `path/to/file` (L<line>)
+
+- **Where:** `path/to/file` (lines X–Y)
+- **Risk:** Concrete impact - what can an attacker do?
+- **Vulnerable code:**
+  ```
+  <minimal relevant snippet>
+  ```
+- **Proposed fix:**
+  ```
+  <fixed, secure code>
+  ```
+- **Why it works:** 1–2 sentences.
+
+---
+
+<one block per finding, most to least severe>
+````
+
+## Severity scale
+
+The badge is one of `[CRITICAL]` · `[MAJOR]` · `[MINOR]` · `[INFO]`, uppercase.
+
+- **[CRITICAL]**: remotely exploitable without auth (or with a standard account),
+  leading to compromise / RCE / mass access to other users' data.
+- **[MAJOR]**: real flaw under a condition (auth required, interaction, config).
+- **[MINOR]**: hardening / defense in depth.
+- **[INFO]**: observation or best practice with no direct risk.
+
+## Conclusion (mandatory, one line)
+
+- `All clear - no critical or major finding detected.`
+- `N critical/major vulnerability(ies) to fix before merge.`

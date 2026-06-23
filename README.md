@@ -1,69 +1,63 @@
 # claude-code-security-audit
 
-A ready-to-use application-security (AppSec) guardrail for **Claude Code**, provided
-per stack. Each bundle adds an **`/audit`** slash command to your project that runs a
-white-box security review of your pending changes (`git diff`) and returns a structured
-report - plus a "passive guardrail" mode that secures code as it is generated.
+A ready-to-use application-security (AppSec) plugin for **Claude Code**. It adds an
+**`/audit`** slash command that **auto-detects your stack**, applies the matching
+vulnerability checklist, runs a white-box security review of your pending changes
+(`git diff`), and returns a structured report.
 
-> These are Claude Code **slash commands** (`.claude/commands/audit.md`) plus a project
-> `CLAUDE.md`, **not** Claude "skills".
+Supported stacks: **PHP**, **Node.js / Express**, **Next.js**, **Django / DRF**,
+**Flask**, **Ruby on Rails**, **Java / Spring Boot**.
 
-Available in two languages: **`en/`** (English) and **`fr/`** (French). The language of
-the bundle files drives the language of the audit report.
+Bilingual: the report is produced in **French** (default) or **English** — pass `fr`
+or `en` to `/audit`.
 
-## Stacks
+## Install (marketplace)
 
-| Stack                              | Path                                                  |
-| ---------------------------------- | ----------------------------------------------------- |
-| PHP (PDO/mysqli, Laravel, Symfony) | `<lang>/php/claude-code-audit-php/`                   |
-| Node.js / Express                  | `<lang>/node-express/claude-code-audit-node-express/` |
-| Next.js                            | `<lang>/nextjs/claude-code-audit-nextjs/`             |
-| Django / DRF                       | `<lang>/django/claude-code-audit-django/`             |
-| Flask                              | `<lang>/flask/claude-code-audit-flask/`               |
-| Ruby on Rails                      | `<lang>/rails/claude-code-audit-rails/`               |
-| Java / Spring Boot                 | `<lang>/spring/claude-code-audit-spring/`             |
-
-## Install
-
-Copy the bundle for your stack (the `.claude/` folder **and** `CLAUDE.md`) to the
-**root of your project** - where you run `claude` and where your git repo lives.
-
-```bash
-# example for a PHP project, from the project root
-cp -r path/to/en/php/claude-code-audit-php/.claude .
-cp    path/to/en/php/claude-code-audit-php/CLAUDE.md .
+```
+/plugin marketplace add Dshellz/claude-code-security-audit
+/plugin install security-audit
+/audit
 ```
 
-If you already have a `.claude/` or `CLAUDE.md`, **merge** instead of overwriting: put
-`audit.md` in `.claude/commands/`, the other two `.md` files in `.claude/`, and copy the
-"security" block into your existing `CLAUDE.md`.
-
-Then start a **new** Claude Code session (commands are detected at startup) and check
-with `/help` that `audit` appears.
+Then start a **new** Claude Code session and check with `/help` that `audit` appears.
 
 ## Usage
 
 ```
-/audit                          # audit pending changes (git diff)
-/audit src/Controller/Foo.php   # audit a specific file
+/audit                          # audit pending changes (git diff), auto-detect stack, FR report
+/audit en                       # same, English report
+/audit en src/Controller/Foo.php   # audit a specific file, English report
 ```
 
-The report sorts findings by severity (critical / major / minor / info),
-gives the risk, the vulnerable code and a fix for each, and ends with `All clear`
-or `N vulnerability(ies)`.
+The report sorts findings by severity (`[CRITICAL]` / `[MAJOR]` / `[MINOR]` / `[INFO]`),
+gives the risk, the vulnerable code and a fix for each, and ends with a one-line
+conclusion (`All clear` or `N vulnerability(ies)`).
 
-## Bundle contents
+## How stack detection works
+
+`/audit` looks for marker files at the project root: `composer.json` → PHP,
+`package.json` with `next` → Next.js (else `express` → Node/Express), `manage.py` or a
+`django` dependency → Django, a `flask` dependency → Flask, `Gemfile` → Rails,
+`pom.xml` / `build.gradle` → Spring. If nothing matches, it asks.
+
+## Repository layout
 
 ```
-claude-code-audit-<stack>/
-├── CLAUDE.md                          # persona + passive guardrail
-└── .claude/
-    ├── commands/audit.md              # the /audit command
-    ├── SECURITY_RULES.md              # vulnerability checklist (per stack)
-    └── security_report_template.md    # report format
+.claude-plugin/
+└── marketplace.json              # marketplace catalog (one plugin)
+plugins/
+└── security-audit/               # the plugin
+    ├── .claude-plugin/plugin.json
+    ├── commands/audit.md         # /audit (auto-detection)
+    └── rules/
+        ├── report-template.fr.md
+        ├── report-template.en.md
+        ├── fr/  (php, node-express, nextjs, django, flask, rails, spring).md
+        └── en/  (same 7 files)
 ```
 
-Feel free to adapt `SECURITY_RULES.md` to your business logic and framework version.
+Feel free to adapt the per-stack `rules/<lang>/<stack>.md` checklists to your business
+logic and framework version.
 
 ## Limitations
 
@@ -74,7 +68,7 @@ responsible for.
 
 ## License
 
-MIT (suggested - adjust to your choice).
+MIT.
 
 ---
 

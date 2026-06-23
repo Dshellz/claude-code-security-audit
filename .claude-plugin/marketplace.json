@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "security-tools",
+  "owner": { "name": "Dshellz" },
+  "description": "Outils de securite pour Claude Code : audit white-box avec auto-detection de stack.",
+  "plugins": [
+    {
+      "name": "security-audit",
+      "source": "./plugins/security-audit",
+      "description": "Audit de securite white-box, auto-detection de stack, avant commit."
+    }
+  ]
+}
