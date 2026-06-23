@@ -3,14 +3,14 @@
 The report produced by `/audit` must follow this exact structure.
 
 ````markdown
-## 🚨 Security audit report
+## Security audit report
 
 **Scope:** <branch / files / argument analyzed>
-**Summary:** 🔴 X critical · 🟠 Y major · 🟡 Z minor · ℹ️ W info
+**Summary:** X critical · Y major · Z minor · W info
 
 ---
 
-### [Severity] - <Vulnerability name> - `path/to/file.ts`
+### [CRITICAL] <Vulnerability name> — `path/to/file.ts` (L<line>)
 
 - **Where:** `path/to/file.ts` (lines X–Y)
 - **Risk:** Concrete impact - what can an attacker do?
@@ -31,13 +31,15 @@ The report produced by `/audit` must follow this exact structure.
 
 ## Severity scale
 
-- **🔴 Critical**: remotely exploitable without auth (or with a standard account),
+The badge is one of `[CRITICAL]` · `[MAJOR]` · `[MINOR]` · `[INFO]`, uppercase.
+
+- **[CRITICAL]**: remotely exploitable without auth (or with a standard account),
   leading to compromise / RCE / mass access to other users' data.
-- **🟠 Major**: real flaw under a condition (auth required, interaction, config).
-- **🟡 Minor**: hardening / defense in depth.
-- **ℹ️ Info**: observation or best practice with no direct risk.
+- **[MAJOR]**: real flaw under a condition (auth required, interaction, config).
+- **[MINOR]**: hardening / defense in depth.
+- **[INFO]**: observation or best practice with no direct risk.
 
 ## Conclusion (mandatory, one line)
 
-- `🟢 All clear - no critical or major finding detected.`
-- `🔴 N critical/major vulnerability(ies) to fix before merge.`
+- `All clear - no critical or major finding detected.`
+- `N critical/major vulnerability(ies) to fix before merge.`

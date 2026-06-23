@@ -46,4 +46,4 @@ see is "to verify", not a confirmed finding.
 
 Produce the report following @.claude/security_report_template.md exactly, findings
 sorted from most to least severe. End with a one-line conclusion:
-`🟢 All clear - ...` or `🔴 N critical/major vulnerability(ies) to fix before merge.`
+`All clear - ...` or `N critical/major vulnerability(ies) to fix before merge.`

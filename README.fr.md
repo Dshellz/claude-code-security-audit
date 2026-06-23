@@ -49,9 +49,9 @@ démarrage) et vérifie avec `/help` que `audit` apparaît.
 /audit src/Controller/Foo.php   # audite un fichier précis
 ```
 
-Le rapport classe les findings par gravité (🔴 critique / 🟠 majeur / 🟡 mineur /
-ℹ️ info), donne pour chacun le risque, le code vulnérable et le correctif, et finit
-par `🟢 RAS` ou `🔴 N vulnérabilité(s)`.
+Le rapport classe les findings par gravité (critique / majeur / mineur /
+info), donne pour chacun le risque, le code vulnérable et le correctif, et finit
+par `RAS` ou `N vulnérabilité(s)`.
 
 ## Contenu d'un bundle
 

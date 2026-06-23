@@ -48,9 +48,9 @@ with `/help` that `audit` appears.
 /audit src/Controller/Foo.php   # audit a specific file
 ```
 
-The report sorts findings by severity (🔴 critical / 🟠 major / 🟡 minor / ℹ️ info),
-gives the risk, the vulnerable code and a fix for each, and ends with `🟢 All clear`
-or `🔴 N vulnerability(ies)`.
+The report sorts findings by severity (critical / major / minor / info),
+gives the risk, the vulnerable code and a fix for each, and ends with `All clear`
+or `N vulnerability(ies)`.
 
 ## Bundle contents
 

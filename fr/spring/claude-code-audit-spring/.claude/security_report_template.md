@@ -3,14 +3,14 @@
 Le rapport produit par `/audit` doit suivre exactement cette structure.
 
 ````markdown
-## 🚨 Rapport d'audit de sécurité
+## Rapport d'audit de sécurité
 
 **Périmètre :** <branche / fichiers / argument analysé>
-**Synthèse :** 🔴 X critique(s) · 🟠 Y majeur(s) · 🟡 Z mineur(s) · ℹ️ W info
+**Synthèse :** X critique(s) · Y majeur(s) · Z mineur(s) · W info
 
 ---
 
-### [Gravité] - <Nom de la faille> - `chemin/du/fichier.java`
+### [CRITICAL] <Nom de la faille> — `chemin/du/fichier.java` (L<ligne>)
 
 - **Où :** `chemin/du/fichier.java` (lignes X–Y)
 - **Le risque :** Impact concret - qu'est-ce qu'un attaquant peut faire ?
@@ -31,13 +31,15 @@ Le rapport produit par `/audit` doit suivre exactement cette structure.
 
 ## Échelle de gravité
 
-- **🔴 Critique** : exploitable à distance sans auth (ou avec un compte standard),
+Le badge est l'un de `[CRITICAL]` · `[MAJOR]` · `[MINOR]` · `[INFO]`, en majuscules.
+
+- **[CRITICAL]** : exploitable à distance sans auth (ou avec un compte standard),
   menant à compromission / RCE / accès massif aux données d'autrui.
-- **🟠 Majeur** : faille réelle sous condition (auth requise, interaction, config).
-- **🟡 Mineur** : durcissement / défense en profondeur.
-- **ℹ️ Info** : observation ou bonne pratique sans risque direct.
+- **[MAJOR]** : faille réelle sous condition (auth requise, interaction, config).
+- **[MINOR]** : durcissement / défense en profondeur.
+- **[INFO]** : observation ou bonne pratique sans risque direct.
 
 ## Conclusion (obligatoire, une ligne)
 
-- `🟢 RAS - aucune faille critique ou majeure détectée.`
-- `🔴 N vulnérabilité(s) critique(s)/majeure(s) à corriger avant le merge.`
+- `RAS - aucune faille critique ou majeure détectée.`
+- `N vulnérabilité(s) critique(s)/majeure(s) à corriger avant le merge.`

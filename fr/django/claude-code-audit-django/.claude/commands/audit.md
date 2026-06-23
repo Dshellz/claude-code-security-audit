@@ -46,4 +46,4 @@ est « à vérifier », pas une faille confirmée.
 
 Génère le rapport en suivant exactement @.claude/security_report_template.md,
 findings triés du plus grave au moins grave. Termine par une ligne de conclusion :
-`🟢 RAS - ...` ou `🔴 N vulnérabilité(s) critique(s)/majeure(s) à corriger avant le merge.`
+`RAS - ...` ou `N vulnérabilité(s) critique(s)/majeure(s) à corriger avant le merge.`
